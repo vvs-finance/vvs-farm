@@ -1,8 +1,8 @@
-pragma solidity >0.4.18;
+pragma solidity 0.6.12;
 
-contract WBNB {
-    string public name     = "Wrapped BNB";
-    string public symbol   = "WBNB";
+contract WCRO {
+    string public name     = "Wrapped CRO";
+    string public symbol   = "WCRO";
     uint8  public decimals = 18;
 
     event  Approval(address indexed src, address indexed guy, uint wad);
@@ -13,7 +13,7 @@ contract WBNB {
     mapping (address => uint)                       public  balanceOf;
     mapping (address => mapping (address => uint))  public  allowance;
 
-    function a() public payable {
+    receive () external payable {
         deposit();
     }
     function deposit() public payable {

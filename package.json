@@ -1,10 +1,10 @@
 {
-  "name": "PancakeSwap",
+  "name": "@vvs-finance/vvs-farm",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "migrate": "truffle migrate --network bscTestnet --reset",
-    "compile": "truffle compile --network bscTestnet",
+    "migrate": "truffle migrate --network cronos --reset",
+    "compile": "truffle compile --network cronos",
     "test": "npx builder test",
     "coverage": "npx builder coverage"
   },
