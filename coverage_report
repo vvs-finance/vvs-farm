@@ -1,0 +1,200 @@
+yarn run v1.22.15
+$ npx hardhat coverage
+
+Version
+=======
+> solidity-coverage: v0.7.13
+
+Instrumenting for coverage...
+=============================
+
+> Craftsman.sol
+> CraftsmanAdmin.sol
+> IGO.sol
+> IIGO.sol
+> VVSInitMintable.sol
+> VVSToken.sol
+> VVSVault.sol
+> Workbench.sol
+
+Coverage skipped for:
+=====================
+
+> libs/MockERC20.sol
+> libs/Multicall2.sol
+> libs/WCRO.sol
+> Timelock.sol
+
+Compilation:
+============
+
+Nothing to compile
+
+Network Info
+============
+> HardhatEVM: v2.8.2
+> network:    hardhat
+
+
+
+  Contract: Craftsman
+    ✓ real case (794ms)
+    ✓ deposit/withdraw (363ms)
+    ✓ staking/unstaking (245ms)
+    ✓ update multiplier (555ms)
+    ✓ should allow dev and only dev to update dev (80ms)
+    ✓ distributeSupply
+    updateStakingRatio
+      ✓ allocPoint of VVS should be 25% by default
+      ✓ only owner can call
+      ✓ should not accept ratio > 50
+      ✓ should have correct allocPoint if increase ratio (76ms)
+      ✓ should have correct allocPoint if decrease ratio (73ms)
+
+  Contract: CraftsmanAdmin
+    add
+      ✓ only owner can call
+      ✓ can call add
+    set
+      ✓ only owner can call
+      ✓ can call set
+    distributeSupply
+      ✓ only owner can call
+      ✓ can call distributeSupply
+    updateStakingRatio
+      ✓ only owner can call
+      ✓ can call distributeSupply
+    enableTransferOwnership
+      ✓ only owner can call
+      ✓ can call enableTransferOwnership
+      ✓ changing newOwner resets the timer
+    transferOwnership
+      ✓ only owner can call
+      ✓ cannot call when timelock timestamp not reached
+      ✓ can transferOwnership after timelock timestamp
+
+  Contract: IGO
+    ✓ should create the contract with 2 pools
+    depositPool
+      ✓ should not allow to deposit with pid more than 1
+      ✓ should not allow to deposit to unset pool
+      ✓ should check the start block and end block for depositing (56ms)
+      ✓ should only allow amount greater than 0
+      ✓ should update the user amount and total pool amount correctly (56ms)
+      ✓ should emit Deposit event with correct parameters (38ms)
+      ✓ should check user limit on depositing (67ms)
+      ✓ should calculate the user allocations correctly (90ms)
+    harvestPool
+      ✓ should check end block for harvesting (64ms)
+      ✓ should check valid pool id for harvesting (54ms)
+      ✓ should check if the user has participated (43ms)
+      ✓ should check if the user has harvested (102ms)
+      ✓ should emit Harvest event with correct parameters (78ms)
+      without tax
+        ✓ should harvest and get refund with correct amount when under-subscribed (178ms)
+        ✓ should harvest and get refund with correct amount when just enough subscription (297ms)
+        ✓ should harvest and get refund with correct amount when over-subscribed (323ms)
+      with tax
+        ✓ should calculate harvest amount, refund and tax correctly when under-subscribed (195ms)
+        ✓ should calculate harvest amount, refund and tax correctly when just enough subscription (188ms)
+        ✓ should calculate harvest amount, refund and tax correctly when 2x subscription (289ms)
+        ✓ should calculate harvest amount, refund and tax correctly when 50x subscription (294ms)
+        ✓ should calculate harvest amount, refund and tax correctly when 100x subscription (245ms)
+        ✓ should calculate harvest amount, refund and tax correctly when 250x subscription (242ms)
+        ✓ should calculate harvest amount, refund and tax correctly when 500x subscription (227ms)
+    setPool
+      ✓ should throw for non admin to set pool
+      ✓ should only allow admin to set pool
+    updateCampaignId
+      ✓ should throw for non admin to update campaign id
+      ✓ should check the block before updating campaign id
+      ✓ should only allow admin to update campaign id
+    updateStartAndEndBlocks
+      ✓ should throw for non admin to update start block and end block
+      ✓ should check the start block if it's has started
+      ✓ should check the new start block if it is in the future
+      ✓ should compare the start block and end block in range before updating
+      ✓ should set start block and end block
+    finalWithdraw
+      ✓ should not allow non admin to withdraw
+      ✓ should not allow to withdraw offering token more than there is
+      ✓ should not allow to withdraw LP token more than there is (58ms)
+      ✓ should allow to withdraw LP token and offering token correctly (81ms)
+    recoverWrongTokens
+      ✓ should not allow non admin to recover tokens
+      ✓ should not allow to recover LP token
+      ✓ should not allow to recover offering token
+      ✓ should only allow to recover wrong token with existing amount (248ms)
+      ✓ should allow to recover wrong token
+    viewUserOfferingAndRefundingAmountsForPools
+      ✓ should display the user offering, refund and tax correctly (141ms)
+    viewUserInfo
+      ✓ should display the user info correctly after depositing into 1 pool, when 2 pools are set (55ms)
+      ✓ should display the user info correctly after depositing into 0 pool, when 2 pools are set
+      ✓ should display the user info correctly after depositing into 2 pool, when 2 pools are set (108ms)
+    viewUserAllocationPools
+      ✓ should return empty allocation for non participated user
+    viewPoolTaxRateOverflow
+      ✓ should return tax rate as zero when no tax set
+      ✓ should return tax rate as non zero when tax is set (103ms)
+
+  Contract: Timelock
+    ✓ should not allow non-owner to do operation (47ms)
+    ✓ should do the timelock thing (56ms)
+    ✓ should also work with Craftsman (172ms)
+
+  Contract: VVSInitMintable
+    ✓ distributeSupply
+    ✓ should only be called once before nextDistributionWindow (71ms)
+
+  Contract: VVSToken
+    ✓ mint
+
+  Contract: VVSVault
+    ✓ can create contract
+    deposit
+      ✓ allows to deposit token when contract is not paused (95ms)
+      ✓ calculates shares correctly after subsequent deposits (203ms)
+      ✓ does not allow to deposit when contract is paused (78ms)
+    withdraw
+      ✓ allows to withdraw token (339ms)
+      ✓ allows to withdraw token even when contract is paused (128ms)
+    harvest
+      ✓ allows to harvest when contract is not paused (265ms)
+      ✓ does not allow to harvest token when contract is paused (82ms)
+    vvsAtLastUserAction
+      ✓ calculates the vvs correctly with balanceOf value after token safeTransfer (192ms)
+    Events on setters
+      ✓ captures events on SetAdmin
+      ✓ captures events on SetTreasury
+      ✓ captures events on SetPerformanceFee
+      ✓ captures events on SetCallFee
+      ✓ captures events on SetWithdrawFee
+      ✓ captures events on SetWithdrawFeePeriod
+
+  Contract: Workbench
+    ✓ mint
+    ✓ burn (54ms)
+    ✓ safeVVSTransfer (39ms)
+
+
+  99 passing (19s)
+
+----------------------|----------|----------|----------|----------|----------------|
+File                  |  % Stmts | % Branch |  % Funcs |  % Lines |Uncovered Lines |
+----------------------|----------|----------|----------|----------|----------------|
+ contracts/           |      100 |    76.63 |    92.41 |    94.87 |                |
+  Craftsman.sol       |      100 |       76 |    90.48 |    93.23 |... 167,168,169 |
+  CraftsmanAdmin.sol  |      100 |      100 |      100 |      100 |                |
+  IGO.sol             |      100 |    86.59 |      100 |      100 |                |
+  IIGO.sol            |      100 |      100 |      100 |      100 |                |
+  VVSInitMintable.sol |      100 |       75 |      100 |      100 |                |
+  VVSToken.sol        |      100 |      100 |      100 |      100 |                |
+  VVSVault.sol        |      100 |       55 |    83.33 |    89.42 |... 280,298,321 |
+  Workbench.sol       |      100 |      100 |      100 |      100 |                |
+----------------------|----------|----------|----------|----------|----------------|
+All files             |      100 |    76.63 |    92.41 |    94.87 |                |
+----------------------|----------|----------|----------|----------|----------------|
+
+> Istanbul reports written to ./coverage/ and ./coverage.json
+Done in 24.16s.
